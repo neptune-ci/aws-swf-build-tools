@@ -10,61 +10,76 @@
 <#if hasParameters>
     @Override
     public final Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}(<@lib.printParameters activityMethod/>) {
-        return ${activityImplMethodName}(<@lib.printInputAsPromise activityMethod/>(ActivitySchedulingOptions)null);
+        return ${activityImplMethodName}(<@lib.printInputAsPromise activityMethod/>(ActivitySchedulingOptions)null, "${activityVersion}");
     }
 
     @Override
     public final Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}(<@lib.printParameters activityMethod/>, Promise<?>... waitFor) {
-        return ${activityImplMethodName}(<@lib.printInputAsPromise activityMethod/>(ActivitySchedulingOptions)null, waitFor);
+        return ${activityImplMethodName}(<@lib.printInputAsPromise activityMethod/>(ActivitySchedulingOptions)null, "${activityVersion}", waitFor);
     }
 
     @Override
     public final Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}(<@lib.printParameters activityMethod/>, ActivitySchedulingOptions optionsOverride, Promise<?>... waitFor) {
-        return ${activityImplMethodName}(<@lib.printInputAsPromise activityMethod/>optionsOverride, waitFor);
+        return ${activityImplMethodName}(<@lib.printInputAsPromise activityMethod/>optionsOverride, "${activityVersion}", waitFor);
+    }
+
+    @Override
+    public final Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}(<@lib.printParameters activityMethod/>, ActivitySchedulingOptions optionsOverride, String activityVersionOverride, Promise<?>... waitFor) {
+        return ${activityImplMethodName}(<@lib.printInputAsPromise activityMethod/>optionsOverride, activityVersionOverride, waitFor);
     }
 
     @Override
     public final Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}(<@lib.printParametersAsPromise activityMethod/>) {
-        return ${activityImplMethodName}(<@lib.printInput activityMethod/>(ActivitySchedulingOptions)null);
+        return ${activityImplMethodName}(<@lib.printInput activityMethod/>(ActivitySchedulingOptions)null, "${activityVersion}");
     }
 
     @Override
     public final Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}(<@lib.printParametersAsPromise activityMethod/>, Promise<?>... waitFor) {
-        return ${activityImplMethodName}(<@lib.printInput activityMethod/>(ActivitySchedulingOptions)null, waitFor);
+        return ${activityImplMethodName}(<@lib.printInput activityMethod/>(ActivitySchedulingOptions)null, "${activityVersion}", waitFor);
     }
 
     @Override
     public final Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}(<@lib.printParametersAsPromise activityMethod/>, ActivitySchedulingOptions optionsOverride, Promise<?>... waitFor) {
-        return ${activityImplMethodName}(<@lib.printInput activityMethod/>optionsOverride, waitFor);
+        return ${activityImplMethodName}(<@lib.printInput activityMethod/>optionsOverride, "${activityVersion}", waitFor);
+    }
+
+    @Override
+    public final Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}(<@lib.printParametersAsPromise activityMethod/>, ActivitySchedulingOptions optionsOverride, String activityVersionOverride, Promise<?>... waitFor) {
+        return ${activityImplMethodName}(<@lib.printInput activityMethod/>optionsOverride, activityVersionOverride, waitFor);
     }
     
     ${activityMethod.annotationsToCopy}
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    protected Promise<${activityMethod.methodReturnType}> ${activityImplMethodName}(<@lib.printParametersAsPromiseFinal activityMethod/>, final ActivitySchedulingOptions optionsOverride, Promise<?>... waitFor) {
+    protected Promise<${activityMethod.methodReturnType}> ${activityImplMethodName}(<@lib.printParametersAsPromiseFinal activityMethod/>, final ActivitySchedulingOptions optionsOverride, String activityVersionOverride, Promise<?>... waitFor) {
 <#else>
     @Override
     public final Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}() {
-        return ${activityImplMethodName}((ActivitySchedulingOptions)null);
+        return ${activityImplMethodName}((ActivitySchedulingOptions)null, "${activityVersion}");
     }
 
     @Override
     public final Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}(Promise<?>... waitFor) {
-        return ${activityImplMethodName}((ActivitySchedulingOptions)null, waitFor);
+        return ${activityImplMethodName}((ActivitySchedulingOptions)null, "${activityVersion}", waitFor);
     }
 
     @Override
     public final Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}(ActivitySchedulingOptions optionsOverride, Promise<?>... waitFor) {
-        return ${activityImplMethodName}(optionsOverride, waitFor);
+        return ${activityImplMethodName}(optionsOverride, "${activityVersion}", waitFor);
+    }
+
+    @Override
+    public final Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}(ActivitySchedulingOptions optionsOverride, String activityVersionOverride, Promise<?>... waitFor) {
+        return ${activityImplMethodName}(optionsOverride, activityVersionOverride, waitFor);
     }
     
     ${activityMethod.annotationsToCopy}
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    protected Promise<${activityMethod.methodReturnType}> ${activityImplMethodName}(final ActivitySchedulingOptions optionsOverride, Promise<?>... waitFor) {
+    protected Promise<${activityMethod.methodReturnType}> ${activityImplMethodName}(final ActivitySchedulingOptions optionsOverride, String activityVersionOverride, Promise<?>... waitFor) {
 </#if>
 
         ActivityType _activityType = new ActivityType();
-		_activityType.setName("${activityName}");
-		_activityType.setVersion("${activityVersion}");
+        _activityType.setName("${activityName}");
+        _activityType.setVersion(activityVersionOverride);
 
         Promise[] _input_ = new Promise[${parameterCount}];
 <#list activityMethod.methodParameters as param>

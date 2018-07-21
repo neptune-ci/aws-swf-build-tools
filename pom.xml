@@ -3,15 +3,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.amazonaws</groupId>
-    <artifactId>aws-swf-build-tools</artifactId>
-    <version>1.1</version>
+    <artifactId>aws-swf-build-tools2</artifactId>
+    <version>2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>AWS SWF Build Tools</name>
+    <name>AWS SWF Build Tools 2</name>
     <description>The SWF build tools jar is required to build AWS SWF flow code.</description>
     <url>https://aws.amazon.com/documentation/swf</url>
+
     <scm>
-        <url>https://github.com/aws/aws-swf-build-tools.git</url>
+        <connection>scm:git:git@github.com:nterry/aws-swf-build-tools2.git</connection>
+        <developerConnection>scm:git:git@github.com:nterry/aws-swf-build-tools2.git</developerConnection>
+        <url>https://github.com/nterry/aws-swf-build-tools2</url>
+        <tag>HEAD</tag>
     </scm>
 
     <licenses>
@@ -28,6 +32,7 @@
         <aspectj.version>1.8.2</aspectj.version>
         <jre.version>1.6</jre.version>
         <maven.javadoc.skip>true</maven.javadoc.skip>
+        <aws-maven.version>5.0.0.RELEASE</aws-maven.version>
     </properties>
 
     <dependencies>
@@ -132,37 +137,24 @@
 
         </plugins>
       </pluginManagement>
+
+        <extensions>
+            <extension>
+                <groupId>org.springframework.build</groupId>
+                <artifactId>aws-maven</artifactId>
+                <version>${aws-maven.version}</version>
+            </extension>
+        </extensions>
     </build>
 
-    <profiles>
-    <profile>
-      <id>publishing</id>
-      <build>
-         <plugins>
-          <plugin>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.sonatype.plugins</groupId>
-            <artifactId>nexus-staging-maven-plugin</artifactId>
-            <version>1.6.7</version>
-            <extensions>true</extensions>
-            <configuration>
-              <serverId>sonatype-nexus-staging</serverId>
-              <nexusUrl>https://oss.sonatype.org</nexusUrl>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    </profiles>
+    <distributionManagement>
+        <repository>
+            <id>s3.release</id>
+            <url>s3://mvn.niceincontact.com/release</url>
+        </repository>
+        <snapshotRepository>
+            <id>s3.snapshot</id>
+            <url>s3://mvn.niceincontact.com/snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>

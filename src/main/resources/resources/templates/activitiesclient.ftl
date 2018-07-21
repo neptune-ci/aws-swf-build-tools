@@ -32,6 +32,11 @@ public interface ${clientInterfaceName} extends ActivitiesClient
      * Generated from {@link ${qualifiedTypeName}#${activityMethod.methodName}}
      */
     Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}(ActivitySchedulingOptions optionsOverride, Promise<?>... waitFor);
+
+    /**
+     * Generated from {@link ${qualifiedTypeName}#${activityMethod.methodName}}
+     */
+    Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}(ActivitySchedulingOptions optionsOverride, String activityVersionOverride, Promise<?>... waitFor);
 <#else>
 
     /**
@@ -49,6 +54,12 @@ public interface ${clientInterfaceName} extends ActivitiesClient
      */
     Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}(<@lib.printParameters activityMethod/>, ActivitySchedulingOptions optionsOverride, Promise<?>... waitFor);
 
+
+    /**
+     * Generated from {@link ${qualifiedTypeName}#${activityMethod.methodName}}
+     */
+    Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}(<@lib.printParameters activityMethod/>, ActivitySchedulingOptions optionsOverride, String activityVersionOverride, Promise<?>... waitFor);
+
     /**
      * Generated from {@link ${qualifiedTypeName}#${activityMethod.methodName}}
      */
@@ -63,6 +74,11 @@ public interface ${clientInterfaceName} extends ActivitiesClient
      * Generated from {@link ${qualifiedTypeName}#${activityMethod.methodName}}
      */
     Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}(<@lib.printParametersAsPromise activityMethod/>, ActivitySchedulingOptions optionsOverride, Promise<?>... waitFor);
+
+    /**
+     * Generated from {@link ${qualifiedTypeName}#${activityMethod.methodName}}
+     */
+    Promise<${activityMethod.methodReturnType}> ${activityMethod.methodName}(<@lib.printParametersAsPromise activityMethod/>, ActivitySchedulingOptions optionsOverride, String activityVersionOverride, Promise<?>... waitFor);
 </#if>
 </#list>
 
